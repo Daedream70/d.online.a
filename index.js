@@ -1,11 +1,24 @@
 const Eris = require("eris");
-const keep_alive = require('./keep_alive.js')
+const keep_alive = require('./keep_alive.js');
 
-// Replace TOKEN with your bot account's token
 const bot = new Eris(process.env.token);
 
-bot.on("error", (err) => {
-  console.error(err); // or your preferred logger
+bot.on("ready", () => {
+  console.log("Bot is ready!");
+
+  bot.editStatus("online", {
+    name: "Dreamcore",
+    type: 1, // 1 = Streaming
+    url: "https://twitch.tv/",
+    application_id: "1346727666681643019",
+    assets: {
+      large_image: "https://www.icegif.com/dreamcore-16/"
+    }
+  });
 });
 
-bot.connect(); // Get the bot to connect to Discord
+bot.on("error", (err) => {
+  console.error(err);
+});
+
+bot.connect();
